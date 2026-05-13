@@ -12,4 +12,6 @@ El script por ahora solo funciona con un txt lo hice como prueba para ver si iba
 
 # Para añadir
 
--- Tendriamos que añadir excepciones para cuando le pongamos algo que no sea una fecha no explote 
+- Tendriamos que añadir excepciones para cuando le pongamos algo que no sea una fecha no explote 
+
+- Implementar para que muestre los de un AP en especifico 
