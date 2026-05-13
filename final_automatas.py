@@ -19,12 +19,12 @@ fecha_fin = datetime.strptime(fecha_fin_str, '%Y-%m-%d')
 resultados_ap = {}
 
 # Abrimos el archivo gigante línea por línea
-with open('log_wifi.txt', 'r', encoding='utf-8') as archivo:
+with open('export-2019-to-now-v4.csv', 'r', encoding='utf-8') as archivo:
     next(archivo) # Saltamos la primera línea si tiene los encabezados
     
     for linea in archivo:
         # Extraemos las columnas separando por tabulaciones o espacios
-        columnas = re.split(r'\s+', linea.strip())
+        columnas = linea.strip().split(',')
         
         # Validación de seguridad: si la línea está rota o incompleta, la saltamos
         if len(columnas) < 15:
@@ -52,7 +52,7 @@ with open('log_wifi.txt', 'r', encoding='utf-8') as archivo:
 # 1. Mostrar en consola
 print("\n--- RESULTADOS ---")
 for ap, usuarios in resultados_ap.items():
-    #print(f"AP (MAC): {ap} -> Usuarios conectados: {len(usuarios)}")
+    #print(f"AP (MAC): {ap} -> Usuarios conectados: {len(usuarios)}")      # Este print Solo muestra la cantidad de usuarios por AP lo podemos meter talvez 
     # print(f"Lista de usuarios: {', '.join(usuarios)}")
     pass
 # 2. Preparar los datos para Excel usando Pandas
@@ -70,3 +70,5 @@ df = pd.DataFrame(datos_excel)
 nombre_archivo = f"Reporte_APs_{fecha_inicio_str}_al_{fecha_fin_str}.xlsx"
 df.to_excel(nombre_archivo, index=False)
 print(f"\n¡Datos exportados exitosamente a {nombre_archivo}!")
+
+

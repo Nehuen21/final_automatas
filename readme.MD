@@ -6,3 +6,10 @@ source entornoAut/bin/activate
 
 pip install pandas openpyxl
 
+El script por ahora solo funciona con un txt lo hice como prueba para ver si iba bien. Hay que probar ahora con el archivo .csv
+
+
+
+# Para añadir
+
+-- Tendriamos que añadir excepciones para cuando le pongamos algo que no sea una fecha no explote 
