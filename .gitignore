@@ -1,2 +1,4 @@
-log_wifi.txt
+entornoAut/
 *.csv
+*.xlsx
+*venv*

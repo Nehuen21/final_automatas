@@ -52,14 +52,17 @@ with open('log_wifi.txt', 'r', encoding='utf-8') as archivo:
 # 1. Mostrar en consola
 print("\n--- RESULTADOS ---")
 for ap, usuarios in resultados_ap.items():
-    print(f"AP (MAC): {ap} -> Usuarios conectados: {len(usuarios)}")
+    #print(f"AP (MAC): {ap} -> Usuarios conectados: {len(usuarios)}")
     # print(f"Lista de usuarios: {', '.join(usuarios)}")
-
+    pass
 # 2. Preparar los datos para Excel usando Pandas
 datos_excel = []
 for ap, usuarios in resultados_ap.items():
     for u in usuarios:
         datos_excel.append({'MAC_AP': ap, 'Usuario': u})
+
+cantidad_regsitros = len(datos_excel)
+print(f"\nCantidad total de registros para exportar: {cantidad_regsitros}")
 
 df = pd.DataFrame(datos_excel)
 
