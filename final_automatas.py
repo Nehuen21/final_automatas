@@ -74,7 +74,7 @@ while True:
     try:
         ap_input = int(input("Ingrese el número del AP a analizar: "))
 
-        if 0 < ap_input < longitud_lista_ap:
+        if 0 <= ap_input < longitud_lista_ap:
             ap_seleccionado = lista_ap[ap_input]
             break
         else: 
@@ -90,10 +90,11 @@ print(resultados_ap)
 
 #Preparamos los datos para pandas
 datos_excel_AP = []
+ap_regex = re.compile(repr(ap_seleccionado))
 for ap, usuarios in resultados_ap.items():
     #print(f"AP (MAC): {ap} -> Usuarios conectados: {len(usuarios)}")      # Este print Solo muestra la cantidad de usuarios por AP lo podemos meter talvez 
     # print(f"Lista de usuarios: {', '.join(usuarios)}")
-    if ap == ap_seleccionado:
+    if ap_regex.match(ap):
         print(usuarios)
         for u in usuarios:
             datos_excel_AP.append({'Usuarios': u})
