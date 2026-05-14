@@ -7,12 +7,21 @@ regex_fecha = re.compile(r'(\d{4}-\d{2}-\d{2})') # Expresion regular para extrae
 regex_mac = re.compile(r'(?:[0-9A-Fa-f]{2}[:\-]){5}[0-9A-Fa-f]{2}') # Expresion regular para extraer direcciones MAC
 
 print("--- SISTEMA DE SEGUIMIENTO DE APs ---")
-fecha_inicio_str = input("Ingrese la fecha de inicio (YYYY-MM-DD): ")
-fecha_fin_str = input("Ingrese la fecha de fin (YYYY-MM-DD): ")
+while True:
+    try:
+        fecha_inicio_str = str(input("Ingrese la fecha de inicio (YYYY-MM-DD): "))
+        fecha_fin_str = str(input("Ingrese la fecha de fin (YYYY-MM-DD): "))
 
+        fecha_inicio = datetime.strptime(fecha_inicio_str, '%Y-%m-%d')
+        fecha_fin = datetime.strptime(fecha_fin_str, '%Y-%m-%d')
+        
+        if fecha_inicio >= datetime.strptime("2019‑01‑01", '%Y-%m-%d') and fecha_fin <= datetime.strptime("2019‑01‑01", '%Y-%m-%d'):
+            break
+        else: continue
+    except Exception as e:
+        print("Por favor elija una fecha válida")
+        
 # Convertimos los strings a objetos 'datetime' para poder comparar rangos (<, >)
-fecha_inicio = datetime.strptime(fecha_inicio_str, '%Y-%m-%d')
-fecha_fin = datetime.strptime(fecha_fin_str, '%Y-%m-%d')
 
 
 # Diccionario para guardar los resultados: { 'MAC_AP_1': {'usuario1', 'usuario2'}, ... }
@@ -32,20 +41,20 @@ with open('export-2019-to-now-v4.csv', 'r', encoding='utf-8') as archivo:
             continue
             
         usuario = columnas[3]
-        fecha_str = columnas[6] # Ajustá este índice según donde caiga la fecha en tu archivo
-        mac_ap = columnas[14]   # Ajustá este índice según donde caiga la MAC en tu archivo
+        fecha_str = columnas[6] 
+        mac_ap = columnas[14]   
         
         # Verificamos que la fecha cumpla con el patrón usando la regex
         if regex_fecha.match(fecha_str):
             fecha_log = datetime.strptime(fecha_str, '%Y-%m-%d')
             
-            # Si la fecha está dentro del rango que pidió el usuario...
+            # Si la fecha está dentro del rango que pidió el usuario
             if fecha_inicio <= fecha_log <= fecha_fin:
                 
                 # Verificamos que la MAC cumpla con el patrón usando la regex
                 if regex_mac.match(mac_ap):
                     
-                    # Lo agregamos a nuestro diccionario
+                    # Lo agregamos al diccionario
                     if mac_ap not in resultados_ap:
                         resultados_ap[mac_ap] = set()
                     resultados_ap[mac_ap].add(usuario)
@@ -61,7 +70,7 @@ for ap in resultados_ap:
     else: continue
 longitud_lista_ap = len(lista_ap)
 while True:
-    print(f"--- Elija porfavor que AP quiere verificar en el periodo indicado {fecha_inicio_str} / {fecha_fin_str}")
+    print(f"--- Elija porfavor que AP quiere verificar en el periodo indicado {fecha_inicio_str} / {fecha_fin_str} ---")
     try:
         ap_input = int(input("Ingrese el número del AP a analizar: "))
 

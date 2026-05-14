@@ -30,3 +30,6 @@ DOCUMENTACIÓN ÚTIL:
  fecha de inicio del test: 2020-11-05
  fecha de fin del test: 2021-01-01
  AP de test: 150
+
+fecha más antigua:2019‑01‑01
+ fecha más actual: 2023‑03‑17
