@@ -2,3 +2,5 @@ entornoAut/
 *.csv
 *.xlsx
 *venv*
+/env*
+*.xlsx*

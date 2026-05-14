@@ -19,6 +19,7 @@ fecha_fin = datetime.strptime(fecha_fin_str, '%Y-%m-%d')
 resultados_ap = {}
 
 # Abrimos el archivo gigante línea por línea
+print("--- Procesando Archivo, Por favor espere ---")
 with open('export-2019-to-now-v4.csv', 'r', encoding='utf-8') as archivo:
     next(archivo) # Saltamos la primera línea si tiene los encabezados
     
@@ -49,13 +50,54 @@ with open('export-2019-to-now-v4.csv', 'r', encoding='utf-8') as archivo:
                         resultados_ap[mac_ap] = set()
                     resultados_ap[mac_ap].add(usuario)
 
+# Que el usuario elija que AP quiere verificar en el periódo de tiempo Indicado previamente
+lista_ap = []
+lista_ap_index = 0
+for ap in resultados_ap:
+    if ap not in lista_ap:
+        lista_ap.append(ap)
+        print(f"{lista_ap_index})- {ap}")
+        lista_ap_index += 1
+    else: continue
+longitud_lista_ap = len(lista_ap)
+while True:
+    print(f"--- Elija porfavor que AP quiere verificar en el periodo indicado {fecha_inicio_str} / {fecha_fin_str}")
+    try:
+        ap_input = int(input("Ingrese el número del AP a analizar: "))
+
+        if 0 < ap_input < longitud_lista_ap:
+            ap_seleccionado = lista_ap[ap_input]
+            break
+        else: 
+            print(f"Elija un número entre 0 y {longitud_lista_ap - 1}")    
+            continue
+    except Exception as e:
+        print(f"Elija un número entre 0 y {longitud_lista_ap - 1}")
+
+
 # 1. Mostrar en consola
 print("\n--- RESULTADOS ---")
+print(resultados_ap)
+
+#Preparamos los datos para pandas
+datos_excel_AP = []
 for ap, usuarios in resultados_ap.items():
     #print(f"AP (MAC): {ap} -> Usuarios conectados: {len(usuarios)}")      # Este print Solo muestra la cantidad de usuarios por AP lo podemos meter talvez 
     # print(f"Lista de usuarios: {', '.join(usuarios)}")
-    pass
+    if ap == ap_seleccionado:
+        print(usuarios)
+        for u in usuarios:
+            datos_excel_AP.append({'Usuarios': u})
+            print(u)
+
+
+df = pd.DataFrame(datos_excel_AP)
+nombre_archivo = f"reporte_{ap_seleccionado}_{fecha_inicio_str}--{fecha_fin_str}.xlsx"
+df.to_excel(nombre_archivo, index=False)
+print(f"\n¡Datos exportados exitosamente a {nombre_archivo}!")
+
 # 2. Preparar los datos para Excel usando Pandas
+"""
 datos_excel = []
 for ap, usuarios in resultados_ap.items():
     for u in usuarios:
@@ -71,4 +113,4 @@ nombre_archivo = f"Reporte_APs_{fecha_inicio_str}_al_{fecha_fin_str}.xlsx"
 df.to_excel(nombre_archivo, index=False)
 print(f"\n¡Datos exportados exitosamente a {nombre_archivo}!")
 
-
+"""
