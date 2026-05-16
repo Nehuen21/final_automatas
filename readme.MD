@@ -12,17 +12,13 @@ El script por ahora solo funciona con un txt lo hice como prueba para ver si iba
 
 # Para añadir
 
-- Tendriamos que añadir excepciones para cuando le pongamos algo que no sea una fecha no explote 
+-- Falta corregir el contador de repetidos, crear un diccionario para que el contador cuente específicamente cada usuario repetido
+y no un contador general con TODOS los usuarios repetidos. --> Hacer un contador que sea un diccionario:
+         {Usuario: contador} --> contador_usuario[Usuario] += 1
+-- Falta Cambiar el regex de la fecha, e invertir ese regex para que el usuario coloque DD-MM-YYYY
+-- NO OLVIDAR LAS FECHAS HARDCODEADAS
 
-- Implementar para que muestre los de un AP en especifico 
-
-- Verificar el mecanismo de líneas faltantes, ya que no se si está bien skipear lineas < 15
-
-- Que exista una opción para mostrar cuantos usuarios se conectaron a cada access point en el periodo de tiempo
-
-1- Que periodo de fechas quiere verificar el usuario
-2- Mostrar una lista de todos los access point 
-3- Que el usuario elija que  AccessPoint quiere comprobar
+CREO que no falta nada más
 
 DOCUMENTACIÓN ÚTIL:
  resultados_ap: { mac_ap:set(usuarios) }
