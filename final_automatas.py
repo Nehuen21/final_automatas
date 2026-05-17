@@ -8,14 +8,16 @@ regex_mac = re.compile(r'(?:[0-9A-Fa-f]{2}[:\-]){5}[0-9A-Fa-f]{2}') # Expresion 
 
 print("--- SISTEMA DE SEGUIMIENTO DE APs ---")
 while True:
-    print("Fechas válidas: 2019-01-01 / 2023-03-07")
+    print("Fechas válidas: 01-01-2019 / 07-03-2023")
     try:
-        #fecha_inicio_str = input("Ingrese la fecha de inicio (YYYY-MM-DD): ")
-        #fecha_fin_str = input("Ingrese la fecha de fin (YYYY-MM-DD): ")
-        fecha_inicio_str = "2020-11-05"
-        fecha_fin_str = "2023-01-01"
-        fecha_inicio = datetime.strptime(fecha_inicio_str, '%Y-%m-%d')
-        fecha_fin = datetime.strptime(fecha_fin_str, '%Y-%m-%d')
+        #fecha_inicio_str = input("Ingrese la fecha de inicio (DD-MM-YYYY): ")
+        #fecha_fin_str = input("Ingrese la fecha de fin (DD-MM-YYYY): ")
+        fecha_inicio_str = "05-11-2021"
+        fecha_fin_str = "01-01-2023"
+        fecha_inicio = datetime.strptime(fecha_inicio_str, '%d-%m-%Y')
+        fecha_fin = datetime.strptime(fecha_fin_str, '%d-%m-%Y')
+
+
         fecha_inicio_limite = datetime.strptime("2019-01-01", '%Y-%m-%d')
         fecha_fin_limite = datetime.strptime("2023-03-07", '%Y-%m-%d')
 
