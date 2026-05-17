@@ -12,7 +12,8 @@ El script por ahora solo funciona con un txt lo hice como prueba para ver si iba
 
 # Para añadir
 
-- Tendriamos que añadir excepciones para cuando le pongamos algo que no sea una fecha no explote 
+- Tendriamos que añadir excepciones para cuando le pongamos algo que no sea una fecha no explote y directamente no lo guarde
+- Corregir para cuando pida el AP la opcion 0 --> la solucion es solo ponerle el "=" a la igualdad
 
 - Implementar para que muestre los de un AP en especifico 
 
@@ -30,3 +31,8 @@ DOCUMENTACIÓN ÚTIL:
  fecha de inicio del test: 2020-11-05
  fecha de fin del test: 2021-01-01
  AP de test: 150
+
+ correcciones de la profe
+# corregir la expresion regular para que tome la fecha al revez
+# visualizacion previa antes de la info 
+# pantalla para verificar que la informacion es la correcta antes de exportar a excel
