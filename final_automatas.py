@@ -37,7 +37,6 @@ while True:
 # --- 3. FUNCIÓN PROCESADORA CON CONTADOR ---
 def funcion_procesadora_archivo(archivo, regex_fecha, regex_mac, fecha_inicio, fecha_fin):
     resultados_ap = {}
-    contador_de_usuarios_repetidos = 0
     
     for linea in archivo:
         columnas = linea.strip().split(',')
@@ -65,11 +64,10 @@ def funcion_procesadora_archivo(archivo, regex_fecha, regex_mac, fecha_inicio, f
             
         if usuario in resultados_ap[mac_ap]:
             resultados_ap[mac_ap][usuario] += 1 # Sumamos 1 conexión más
-            contador_de_usuarios_repetidos += 1
         else:
             resultados_ap[mac_ap][usuario] = 1  # Primera conexión
 
-    return resultados_ap, contador_de_usuarios_repetidos
+    return resultados_ap
 
 
 # --- 4. APERTURA DE ARCHIVO ---
@@ -78,7 +76,7 @@ with open('export-2019-to-now-v4.csv', 'r', encoding='utf-8') as archivo:
     next(archivo) # Saltamos la primera línea (encabezados)
     
     # Desempaquetamos correctamente para evitar el error de Tupla
-    resultados_ap, total_repetidos = funcion_procesadora_archivo(
+    resultados_ap = funcion_procesadora_archivo(
         archivo=archivo, 
         regex_fecha=regex_fecha,
         regex_mac=regex_mac,
