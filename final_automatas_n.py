@@ -121,12 +121,12 @@ while True:
 
 
 
+# linea de confirmacion y exportacion del franco , desde linea 111 la del print resultados
 
+# el while true del franco linea 10 por ahi 
+# with open del franco 
 
-
-
-
-
+# funcion_procesadora de archivos : que al exportarel excel muestre las veces q se conecto, usamos un contador 
 
 
 
