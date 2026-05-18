@@ -48,10 +48,10 @@ def funcion_procesadora_archivo(archivo, regex_fecha, regex_mac, fecha_inicio, f
         fecha_str = columnas[6] 
         mac_ap = columnas[13] # Índice 13  (columna que estaba mal)
         
-        if not regex_fecha.match(fecha_str):
+        if not regex_fecha.match(fecha_str): #para verificar que la fecha tenga el formato correcto antes de intentar parsearla
             continue
             
-        fecha_log = datetime.strptime(fecha_str, '%Y-%m-%d')
+        fecha_log = datetime.strptime(fecha_str, '%Y-%m-%d') # Parseamos la fecha del log para compararla con el rango ingresado por el usuario
         if not (fecha_inicio <= fecha_log <= fecha_fin):
             continue
             
@@ -65,7 +65,7 @@ def funcion_procesadora_archivo(archivo, regex_fecha, regex_mac, fecha_inicio, f
         if usuario in resultados_ap[mac_ap]:
             resultados_ap[mac_ap][usuario] += 1 # Sumamos 1 conexión más
         else:
-            resultados_ap[mac_ap][usuario] = 1  # Primera conexión
+            resultados_ap[mac_ap][usuario] = 1  # Primera conexión (inicializamos)
 
     return resultados_ap
 
@@ -143,7 +143,7 @@ while True:
         ap_limpio = ap_seleccionado.replace(':', '-') 
         nombre_archivo = f"reporte_{ap_limpio}_{fecha_inicio_str}--{fecha_fin_str}.xlsx"
         
-        df.to_excel(nombre_archivo, index=False)
+        df.to_excel(nombre_archivo, index=True)
         print(f"\n¡Datos exportados exitosamente a {nombre_archivo}! El programa ha finalizado.")
         break 
         
